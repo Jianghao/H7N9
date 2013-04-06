@@ -19,4 +19,4 @@
 ## 意见反馈
 该Web GIS平台属于个人专业知识应用于突发事件发布与分析的实践，以及让更多人了解疫情发展的平台，数据来源于官方发布。如有意见，请联系
 * 邮箱：wangjh@lreis.ac.cn
-* 微博：weibo@lreis.ac.cn
+* 微博：weibo.com/hellowangjh
