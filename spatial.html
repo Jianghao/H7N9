@@ -1,0 +1,129 @@
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+	<title>Heatmap Layer</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<style>
+				#heatmapArea {
+					position:relative;
+					float:left;
+					width:800px;
+					height:600px;
+					border:1px dashed black;
+				}
+				#configArea {
+					position:relative;
+					float:left;
+					width:200px;
+					padding:15px;
+					padding-top:0;
+					padding-right:0;
+				}
+			</style>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+	<link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="#">H7N9</a>
+          <div class="navbar-content">
+            <ul class="nav">
+              <li>
+                <a href="index.html">Home</a> 
+              </li>
+              <li class="active">
+                <a href="spatial.html">Spatial</a> 
+              </li>
+              <li>
+                <a href="temporal.html">Temporal</a> 
+              </li>
+              <li>
+                <a href="image.html">Images</a> 
+              </li>
+              <li>
+                <a href="report.html">Report</a> 
+              </li>
+              <li>
+                <a href="news.html">News</a> 
+              </li>
+              <li>
+                <a href="about.html">About</a> 
+              </li>
+            </ul>
+          </div>
+          <form class="navbar-search pull-right">
+            <i class="icon-search"></i>
+            <input type="text" class="search-query" placeholder="Search..."> 
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <hr>
+<div class="span12">
+			<div id="heatmapArea">
+			</div>
+			<div id="configArea">
+				<div id="tog" class="btn">Toggle HeatmapOverlay</div>
+			</div>
+			
+</div>
+<script type="text/javascript" src="js/heatmap.js"></script>
+<script type="text/javascript" src="js/heatmap-gmaps.js"></script>
+<script type="text/javascript">
+	var map;
+	var heatmap; 
+
+	window.onload = function(){
+
+		var myLatlng = new google.maps.LatLng(34, 117);
+		// sorry - this demo is a beta
+		// there is lots of work todo
+		// but I don't have enough time for eg redrawing on dragrelease right now
+		var myOptions = {
+		  zoom: 5,
+		  center: myLatlng,
+		  mapTypeId: google.maps.MapTypeId.ROADMAP,
+		  disableDefaultUI: false,
+		  scrollwheel: true,
+		  draggable: true,
+		  navigationControl: true,
+		  mapTypeControl: false,
+		  scaleControl: true,
+		  disableDoubleClickZoom: false
+		};
+		map = new google.maps.Map(document.getElementById("heatmapArea"), myOptions);
+		
+		heatmap = new HeatmapOverlay(map, {"radius":20, "visible":true, "opacity":60});
+		
+		document.getElementById("tog").onclick = function(){
+			heatmap.toggle();
+		};
+		
+		var testData={
+	    		max: 3,
+	    		data: [{lat: 31.069403, lng: 121.687111, count: 1}, {lat: 31.230393, lng: 121.473704, count: 1}, {lat: 32.301556, lng: 118.317107, count: 1}, {lat: 31.952879, lng: 118.839979, count: 1}, {lat: 34.111022, lng: 118.804784, count: 1}, {lat: 31.137729, lng: 120.645222, count: 1}, {lat: 31.527954, lng: 120.282692, count: 1}, {lat: 29.474765, lng: 119.281212, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.857151, lng: 120.185838, count: 1}, {lat: 31.130393, lng: 121.573704, count: 1}, {lat: 31.21677, lng: 121.4432, count: 1}, {lat: 31.20657, lng: 121.5234, count: 1}, {lat: 31.141, lng: 121.3941, count: 1}, {lat: 32.023325, lng: 118.788302, count: 1}, {lat: 32.013025, lng: 118.798402, count: 1}, {lat: 31.108213, lng: 121.407112, count: 1}, {lat: 31.272095, lng: 121.453768, count: 1}, {lat: 31.109389, lng: 121.546812, count: 1}, {lat: 31.005863, lng: 121.590757, count: 1}, {lat: 33.893217, lng: 115.7845, count: 1}, {lat: 32.089847, lng: 118.740183, count: 1}, {lat: 32.200019, lng: 119.410297, count: 1}, {lat: 30.932832, lng: 121.562539, count: 1}, {lat: 30.942832, lng: 121.582539, count: 1}, {lat: 30.922832, lng: 121.522539, count: 1}, {lat: 30.912832, lng: 121.532539, count: 1}, {lat: 30.932832, lng: 121.572539, count: 1}, {lat: 30.8963919756, lng: 120.0819574728, count: 1}, {lat: 30.2764148092, lng: 120.1503804986, count: 1}, {lat: 30.282832, lng: 120.1603804986, count: 1}, {lat: 31.6829226621, lng: 120.2938896937, count: 1}, {lat: 31.9226400247, lng: 120.2803433293, count: 1}, {lat: 31.3113288738, lng: 121.5210728214, count: 1}, {lat: 31.2323104171, lng: 121.4691603379, count: 1}, {lat: 31.3921843776, lng: 121.2326656263, count: 1}, {lat: 32.396080839, lng: 119.4074835648, count: 1}, {lat: 31.24789008, lng: 120.7297638214, count: 1}, {lat: 31.2423104171, lng: 121.7297638214, count: 1}, {lat: 31.24189008, lng: 120.9297638214, count: 1}, {lat: 30.8963919756, lng: 120.0819574728, count: 1}, {lat: 30.2864148092, lng: 120.1503804986, count: 1}, {lat: 30.2764148092, lng: 120.1603804986, count: 1}, {lat: 40.1291199969, lng: 116.6489379623, count: 1}, {lat: 32.1003067, lng: 118.9402972, count: 1}, {lat: 31.653584, lng: 120.752507, count: 1}, {lat: 31.230393, lng: 121.473704, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 33.625607, lng: 114.64202, count: 1}, {lat: 34.396968, lng: 114.157643, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 27.994267, lng: 120.699367, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 33.391508, lng: 120.13994, count: 1}, {lat: 32.096168, lng: 118.908493, count: 1}, {lat: 31.230393, lng: 121.473704, count: 1}, {lat: 31.230393, lng: 121.473704, count: 1}, {lat: 31.230393, lng: 121.473704, count: 1}, {lat: 31.384913, lng: 120.98115, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 32.689438, lng: 119.003686, count: 1}, {lat: 32.011811, lng: 118.798656, count: 1}, {lat: 31.384913, lng: 120.98115, count: 1}, {lat: 31.2420736, lng: 120.5100598, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 31.250393, lng: 121.473704, count: 1}, {lat: 31.260393, lng: 121.433704, count: 1}, {lat: 31.237393, lng: 121.423704, count: 1}, {lat: 31.210393, lng: 121.483704, count: 1}, {lat: 31.280393, lng: 121.503704, count: 1}, {lat: 31.280393, lng: 121.403704, count: 1}, {lat: 31.280393, lng: 121.403704, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 34.755588696, lng: 113.671427199, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.7562199146, lng: 120.7542300079, count: 1}, {lat: 32.0506932714, lng: 118.7926769722, count: 1}, {lat: 31.2248847336, lng: 121.4741605244, count: 1}, {lat: 32.0506932714, lng: 118.7926769722, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 32.0506932714, lng: 118.7926769722, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 31.2248847336, lng: 121.4741605244, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 30.7562199146, lng: 120.7542300079, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 34.8112940189, lng: 117.3178455978, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 32.691438044, lng: 118.9983966838, count: 1}, {lat: 25.0770371, lng: 121.2323876, count: 1}, {lat: 28.6646383922, lng: 115.8920132949, count: 1}, {lat: 34.7404416684, lng: 113.6070596653, count: 1}, {lat: 29.9984008053, lng: 120.5820427711, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 25.0778887407, lng: 117.0128448373, count: 1}, {lat: 30.894348, lng: 120.086823, count: 1}, {lat: 31.6829226621, lng: 120.2938896937, count: 1}, {lat: 34.2060455573, lng: 117.2783374371, count: 1}, {lat: 32.0506932714, lng: 118.7926769722, count: 1}, {lat: 28.6646383922, lng: 115.8920132949, count: 1}, {lat: 28.5238706355, lng: 114.3657563108, count: 1}, {lat: 27.2421219904, lng: 111.4622173697, count: 1}, {lat: 28.6646383922, lng: 115.8920132949, count: 1}, {lat: 28.6646383922, lng: 115.8920132949, count: 1}, {lat: 34.8112940189, lng: 117.3178455978, count: 1}, {lat: 25.7396128485, lng: 119.3859705575, count: 1}, {lat: 30.274089, lng: 120.155069, count: 1}, {lat: 26.0702491516, lng: 119.2333343968, count: 1}, {lat: 27.2421219904, lng: 111.4622173697, count: 1}]
+	      };
+	    
+		
+		// this is important, because if you set the data set too early, the latlng/pixel projection doesn't work
+		google.maps.event.addListenerOnce(map, "idle", function(){
+			heatmap.setDataSet(testData);
+		});
+	};
+</script>
+    <hr>
+    <footer>
+      <center>
+        <p>© Jianghao Wang 2013, All Right Reserved</p>
+      </center>
+    </footer>
+</body>
+</html>
